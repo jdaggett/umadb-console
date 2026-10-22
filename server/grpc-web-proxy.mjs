@@ -181,9 +181,12 @@ export function umadbGrpcWebProxy(options) {
       server.config.logger.info(`  ➜  UmaDB:   proxying gRPC-Web to ${proxy.target}`);
     });
   };
+  // Install from the returned post-hook, not directly: Vite adds its CORS and
+  // host-check (DNS rebinding) middlewares after configureServer runs, and the
+  // proxy must sit behind them since it can attach UMADB_API_KEY to requests.
   return {
     name: "umadb-grpc-web-proxy",
-    configureServer: install,
-    configurePreviewServer: install,
+    configureServer: (server) => () => install(server),
+    configurePreviewServer: (server) => () => install(server),
   };
 }
