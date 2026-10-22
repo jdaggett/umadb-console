@@ -30,5 +30,10 @@
   "description": "Browser console for the UmaDB event store",
   "engines": {
     "node": ">=20"
+  },
+  "allowScripts": {
+    "@bufbuild/buf@1.74.0": true,
+    "esbuild@0.25.12": true,
+    "fsevents@2.3.3": true
   }
 }
