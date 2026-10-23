@@ -1,0 +1,27 @@
+# UmaDB and the console. Start with `docker compose up --build`, then open
+# http://localhost:4173. UmaDB's gRPC port is also published on 50051.
+services:
+  umadb:
+    image: umadb/umadb:latest
+    # The image listens on 0.0.0.0:50051 and stores data in /data by default.
+    # To require an API key, override `command` with those defaults plus
+    # `--api-key ${UMADB_API_KEY}` (see `docker run --rm umadb/umadb --help`).
+    ports:
+      - "50051:50051"
+    volumes:
+      - umadb-data:/data
+    restart: unless-stopped
+
+  console:
+    build: .
+    environment:
+      UMADB_URL: http://umadb:50051
+      UMADB_API_KEY: ${UMADB_API_KEY:-}
+    ports:
+      - "4173:4173"
+    depends_on:
+      - umadb
+    restart: unless-stopped
+
+volumes:
+  umadb-data:
