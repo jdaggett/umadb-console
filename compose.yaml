@@ -1,3 +1,5 @@
+name: umadb-console
+
 # UmaDB and the console. Start with `docker compose up --build`, then open
 # http://localhost:4173. UmaDB's gRPC port is also published on 50051.
 services:

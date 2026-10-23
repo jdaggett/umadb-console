@@ -1,4 +1,4 @@
-# umadb-ui
+# umadb-console
 
 A browser console for [UmaDB](https://umadb.io), the event store built for Dynamic
 Consistency Boundaries. Built with React, TypeScript and Vite, it works with any stock UmaDB
